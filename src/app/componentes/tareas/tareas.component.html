@@ -1,3 +1,35 @@
-<p>
-  tareas works!
-</p>
+<div *ngIf="tareas?.length > 0; else sinTareas">
+
+  <ul *ngFor="let tarea of tareas" class="collection">
+
+    <li class="collection-item" (dblclick)="deleteTarea($event, tarea)">
+      <strong>{{ tarea.titulo }}</strong>: {{ tarea.descripcion }}
+      <a href="#" class="secondary-content">
+        <i (click)="deleteTarea($event, tarea)" class="fa fa-trash"></i>
+        <i (click)="editTarea($event, tarea)" class="fa fa-pencil"></i>
+      </a>
+
+      <div *ngIf="editar && tareaEdita.id === tarea.id">
+
+        <form (ngSubmit)="updateTarea(tarea)">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" name="titulo" placeholder="Edita Título" [(ngModel)]="tarea.titulo">
+            </div>
+
+            <div class="input-field col s6">
+              <input type="text" name="descripcion" placeholder="Edita Descripción" [(ngModel)]="tarea.descripcion">
+            </div>
+            <input type="submit" class="btn" value="Actualiza Tarea">
+            <button class="btn red" (click)="deleteTarea($event, tarea)">Eliminar Tarea</button>
+
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<ng-template #sinTareas>
+  <h4>No hay tareas wey</h4>
+</ng-template>

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TareasComponent } from './componentes/tareas/tareas.component';
@@ -22,7 +23,8 @@ import { TareaService } from './servicios/tarea.service';
     BrowserModule,
     AngularFireModule,
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase, 'AngularEjemplo')
+    AngularFireModule.initializeApp(environment.firebase, 'AngularEjemplo'),
+    FormsModule
   ],
   providers: [TareaService],
   bootstrap: [AppComponent]

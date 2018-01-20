@@ -10,14 +10,36 @@ import { TareaService } from '../../servicios/tarea.service';
 })
 export class TareasComponent implements OnInit {
   tareas: Tarea[];
-
+  editar: boolean;
+  tareaEdita: Tarea;
 
   constructor(public tareaServ: TareaService) { }
 
   ngOnInit() {
     this.tareaServ.getTareas().subscribe(tareas => {
-      console.log(tareas);
+      this.tareas = tareas;
     });
   }
 
+
+  deleteTarea(event, tarea) {
+    const respuesta = confirm('¿Estas seguro de eliminar esta chunche?');
+    if (respuesta) {
+      this.tareaServ.deleteTarea(tarea);
+    }
+    return;
+  }
+
+
+  editTarea(event, tarea) {
+    this.editar = !this.editar;
+    this.tareaEdita = tarea;
+  }
+
+
+  updateTarea(tarea) {
+    this.tareaServ.updateTarea(tarea);
+    this.tareaEdita = null;
+    this.editar = false;
+  }
 }

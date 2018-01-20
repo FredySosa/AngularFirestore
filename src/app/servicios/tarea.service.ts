@@ -30,4 +30,19 @@ export class TareaService {
   getTareas() {
     return this.tareas;
   }
+
+  addTarea(tarea: Tarea) {
+    this.tareasCollection.add(tarea);
+  }
+
+  deleteTarea(tarea: Tarea) {
+    this.tareaDoc = this.afs.doc(`tareas/${tarea.id}`);
+    this.tareaDoc.delete();
+  }
+
+  updateTarea(tarea: Tarea) {
+    this.tareaDoc = this.afs.doc(`tareas/${tarea.id}`);
+    this.tareaDoc.set(tarea);
+  }
+
 }
